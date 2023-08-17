@@ -21,17 +21,14 @@ namespace WebApplication.Module32
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<BlogContext>(options => options.UseSqlServer(connection));
             services.AddControllersWithViews();
-            // регистрация сервиса репозитория для взаимодействия с базой данных
             services.AddSingleton<IBlogRepository, BlogRepository>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -41,13 +38,11 @@ namespace WebApplication.Module32
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            // Подключаем логирвоание с использованием ПО промежуточного слоя
             app.UseMiddleware<LoggingMiddleware>();
 
             app.UseRouting();
