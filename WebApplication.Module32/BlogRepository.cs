@@ -33,5 +33,10 @@ namespace WebApplication.Module32
 
             await _context.SaveChangesAsync();
         }
+
+        public async Task<List<Request>> GetRequests()
+        {
+            return await _context.Requests.ToListAsync();
+        }
     }
 }

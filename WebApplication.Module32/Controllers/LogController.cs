@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Linq;
-using WebApplication.Module32.Models.Db;
+using System.Threading.Tasks; // Не забудьте добавить это
 
 namespace WebApplication.Module32.Controllers
 {
@@ -13,10 +13,11 @@ namespace WebApplication.Module32.Controllers
             _repository = repository;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index() // Сделал метод асинхронным
         {
-            var requests = _repository.GetRequests().OrderByDescending(r => r.Date).ToList();
-            return View(requests);
+            var requests = await _repository.GetRequests();
+            var orderedRequests = requests.OrderByDescending(r => r.Date).ToList();
+            return View(orderedRequests);
         }
     }
 }

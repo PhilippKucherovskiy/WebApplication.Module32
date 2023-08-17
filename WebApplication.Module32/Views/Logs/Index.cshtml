@@ -1,18 +1,18 @@
-﻿@model List<Request>
+﻿@model List<WebApplication.Module32.Models.Db.Request>
 
-<h2>History of Requests</h2>
-
-<table class="table">
+<table>
     <thead>
         <tr>
+            <th>Id</th>
             <th>Date</th>
-            <th>URL</th>
+            <th>Url</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var request in Model)
         {
             <tr>
+                <td>@request.Id</td>
                 <td>@request.Date</td>
                 <td>@request.Url</td>
             </tr>
