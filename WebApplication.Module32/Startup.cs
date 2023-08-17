@@ -52,6 +52,11 @@ namespace WebApplication.Module32
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                    name: "logs",
+                    pattern: "logs",
+                    defaults: new { controller = "Logs", action = "Index" });
+
+                endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
